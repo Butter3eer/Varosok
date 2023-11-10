@@ -33,10 +33,10 @@ public class InsertActivity extends AppCompatActivity {
         buttonInsertFelvetel.setOnClickListener(view -> {
             if (editTextInsertNev.getText().toString().isEmpty() || editTextInsertOrszag.getText().toString().isEmpty() || editTextInsertLakossag.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Minden mező kitöltése kötelező!", Toast.LENGTH_SHORT).show();
-                buttonInsertFelvetel.setClickable(false);
+                buttonInsertFelvetel.setEnabled(false);
             }
             else {
-                buttonInsertFelvetel.setClickable(true);
+                buttonInsertFelvetel.setEnabled(true);
                 if (dbHelper.rogzites(editTextInsertNev.getText().toString(), editTextInsertOrszag.getText().toString(), Integer.parseInt(editTextInsertLakossag.getText().toString()))) {
                     Toast.makeText(this, "Sikeres felvétel!", Toast.LENGTH_SHORT).show();
                 }
@@ -47,11 +47,11 @@ public class InsertActivity extends AppCompatActivity {
         });
 
         editTextInsertNev.setOnFocusChangeListener((view, b) -> {
-            buttonInsertFelvetel.setClickable(false);
+            buttonInsertFelvetel.setEnabled(false);
             if (!b) {
                 if (dbHelper.adatLekerdezes(editTextInsertNev.getText().toString()).getCount() == 0) {
                     editTextInsertNev.setTextColor(getResources().getColor(R.color.Green));
-                    buttonInsertFelvetel.setClickable(true);
+                    buttonInsertFelvetel.setEnabled(true);
                 }
                 else {
                     editTextInsertNev.setTextColor(getResources().getColor(R.color.Red));
